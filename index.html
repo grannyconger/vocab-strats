@@ -1,0 +1,552 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="12 vocabulary strategies grouped into six color-coded families, with a scenario finder and quick comparison table.">
+<title>Vocabulary Strategies Toolkit</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=IBM+Plex+Mono:wght@500&display=swap">
+<style>
+/* Layout: teacher's field guide. Sticky contents rail on wide screens, one column on phones. Six strategy families, each with its own mild hue. */
+:root {
+  --bg: #f6f7f9;
+  --surface: #ffffff;
+  --fg: #1d2330;
+  --muted: #5a6274;
+  --line: #dde1e8;
+  --accent: #2b3a55;
+
+  --c1: #1c7466; --t1: #e2f2ee;  /* Picture It */
+  --c2: #4a4fa8; --t2: #e8e9f8;  /* Think It Through */
+  --c3: #8f6110; --t3: #f6eedb;  /* Write It */
+  --c4: #1f68a2; --t4: #e1edf8;  /* Teach and Present */
+  --c5: #a83e5a; --t5: #f8e5ea;  /* Act It Out */
+  --c6: #567422; --t6: #ebf1de;  /* Reinforce Everywhere */
+
+  --f-display: "Bricolage Grotesque", "Avenir Next", "Segoe UI", system-ui, sans-serif;
+  --f-body: "Atkinson Hyperlegible", "Segoe UI", system-ui, sans-serif;
+  --f-label: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #12151c; --surface: #1a1e27; --fg: #e6e9ef; --muted: #a2a9b8; --line: #2c3240; --accent: #c4cde0;
+    --c1: #6cc9b8; --t1: #17312d;
+    --c2: #a5a9f0; --t2: #23254a;
+    --c3: #e0b15b; --t3: #352a14;
+    --c4: #7db8e8; --t4: #16293b;
+    --c5: #ec93ab; --t5: #3a1c25;
+    --c6: #a9cc6c; --t6: #263016;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #12151c; --surface: #1a1e27; --fg: #e6e9ef; --muted: #a2a9b8; --line: #2c3240; --accent: #c4cde0;
+  --c1: #6cc9b8; --t1: #17312d;
+  --c2: #a5a9f0; --t2: #23254a;
+  --c3: #e0b15b; --t3: #352a14;
+  --c4: #7db8e8; --t4: #16293b;
+  --c5: #ec93ab; --t5: #3a1c25;
+  --c6: #a9cc6c; --t6: #263016;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--f-body);
+  font-size: 1.0625rem;
+  line-height: 1.55;
+}
+a { color: inherit; }
+a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 4px; }
+
+.wrap {
+  max-width: 74rem;
+  margin: 0 auto;
+  padding-inline: 1rem;
+  padding-block: 2rem 4rem;
+  display: grid;
+  grid-template-columns: 15rem minmax(0, 1fr);
+  gap: 3rem;
+}
+@media (max-width: 860px) {
+  .wrap { grid-template-columns: minmax(0, 1fr); gap: 1.5rem; padding-block: 1.25rem 3rem; }
+}
+
+/* family color mapping */
+.f1 { --c: var(--c1); --t: var(--t1); }
+.f2 { --c: var(--c2); --t: var(--t2); }
+.f3 { --c: var(--c3); --t: var(--t3); }
+.f4 { --c: var(--c4); --t: var(--t4); }
+.f5 { --c: var(--c5); --t: var(--t5); }
+.f6 { --c: var(--c6); --t: var(--t6); }
+.f0 { --c: var(--accent); --t: var(--surface); }
+
+/* contents rail */
+nav.toc { position: sticky; top: calc(env(safe-area-inset-top, 0px) + 1.5rem); align-self: start; max-height: calc(100vh - 3rem); overflow-y: auto; }
+@media (max-width: 860px) { nav.toc { position: static; max-height: none; } }
+.toc h2 {
+  font-family: var(--f-label); font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--muted); margin: 0 0 0.6rem; font-weight: 500;
+}
+.toc ol { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.15rem; }
+.toc > ol > li > a { display: block; padding: 0.3rem 0.5rem; border-radius: 6px; text-decoration: none; font-weight: 700; font-size: 0.95rem; color: var(--c); }
+.toc > ol > li > a:hover { background: var(--t); }
+.toc ol ol { padding-left: 0.9rem; margin: 0.1rem 0 0.4rem; border-left: 2px solid var(--t); margin-left: 0.5rem; }
+.toc ol ol a { display: block; padding: 0.18rem 0.5rem; text-decoration: none; font-size: 0.88rem; color: var(--muted); border-radius: 4px; }
+.toc ol ol a:hover { color: var(--c); }
+@media (max-width: 860px) {
+  .toc { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 1rem; }
+  .toc > ol { grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr)); column-gap: 1rem; }
+}
+
+main { min-width: 0; display: grid; gap: 3rem; }
+
+/* masthead */
+header.mast { display: grid; gap: 0.6rem; }
+.eyebrow { font-family: var(--f-label); font-size: 0.74rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
+h1 {
+  font-family: var(--f-display); font-weight: 800; font-size: clamp(2rem, 5vw, 3rem);
+  line-height: 1.05; margin: 0; text-wrap: balance; letter-spacing: -0.01em;
+}
+.lede { margin: 0; max-width: 60ch; color: var(--muted); font-size: 1.1rem; }
+.legend { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 0.4rem; }
+.legend a {
+  font-size: 0.85rem; font-weight: 700; text-decoration: none; color: var(--c); background: var(--t);
+  padding: 0.25rem 0.65rem; border-radius: 999px;
+}
+
+/* section headers */
+section { display: grid; gap: 1.25rem; scroll-margin-top: 1rem; }
+.sec-head {
+  display: flex; align-items: baseline; flex-wrap: wrap; gap: 0.4rem 0.9rem;
+  background: var(--t); padding: 0.75rem 1rem; border-radius: 10px;
+}
+.f0 .sec-head { background: transparent; padding: 0; border-bottom: 2px solid var(--line); padding-bottom: 0.5rem; border-radius: 0; }
+h2 {
+  font-family: var(--f-display); font-weight: 800; font-size: 1.6rem; line-height: 1.15;
+  margin: 0; color: var(--c); text-wrap: balance;
+}
+.sec-head p { margin: 0; color: var(--fg); font-size: 0.98rem; }
+
+/* how to use */
+.steps3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0.75rem; margin: 0; padding: 0; list-style: none; counter-reset: s; }
+@media (max-width: 640px) { .steps3 { grid-template-columns: minmax(0, 1fr); } }
+.steps3 li { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 0.85rem 1rem; counter-increment: s; }
+.steps3 li::before { content: counter(s); font-family: var(--f-label); font-size: 0.78rem; color: var(--muted); display: block; margin-bottom: 0.2rem; }
+.steps3 b { display: block; }
+.tip { margin: 0; font-size: 0.98rem; color: var(--muted); }
+.tip b { color: var(--fg); }
+
+/* tables */
+.tbl { overflow-x: auto; background: var(--surface); border: 1px solid var(--line); border-radius: 10px; }
+table { border-collapse: collapse; width: 100%; font-size: 0.96rem; }
+th, td { text-align: left; padding: 0.6rem 0.85rem; border-bottom: 1px solid var(--line); vertical-align: top; }
+tr:last-child td { border-bottom: 0; }
+th { font-family: var(--f-label); font-weight: 500; font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); background: var(--bg); white-space: nowrap; }
+.chip {
+  display: inline-block; font-weight: 700; font-size: 0.88rem; text-decoration: none;
+  color: var(--c); background: var(--t); padding: 0.12rem 0.55rem; border-radius: 6px; margin: 0.1rem 0.15rem 0.1rem 0; white-space: nowrap;
+}
+.chip:hover { text-decoration: underline; }
+.also .chip { font-weight: 400; background: transparent; border: 1px solid var(--t); }
+.dot { display: inline-block; width: 0.6rem; height: 0.6rem; border-radius: 50%; background: var(--c); margin-right: 0.45rem; vertical-align: 0.05em; }
+.lvl { font-variant-numeric: tabular-nums; white-space: nowrap; }
+.note { margin: 0; font-size: 0.88rem; color: var(--muted); }
+
+/* strategy cards */
+.cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(19rem, 1fr)); gap: 1rem; }
+article {
+  background: var(--surface); border: 1px solid var(--line); border-radius: 10px;
+  padding: 1.1rem 1.2rem 1.2rem; display: grid; gap: 0.75rem; align-content: start; min-width: 0;
+  scroll-margin-top: 1rem;
+}
+h3 {
+  font-family: var(--f-display); font-weight: 600; font-size: 1.3rem; line-height: 1.2;
+  margin: 0; color: var(--c); display: flex; align-items: center; gap: 0.5rem;
+}
+h3::before { content: ""; width: 0.65rem; height: 0.65rem; border-radius: 3px; background: var(--c); flex: none; }
+.hook { margin: 0; font-weight: 700; }
+.kv { display: grid; grid-template-columns: 5.5rem minmax(0, 1fr); gap: 0.35rem 0.75rem; margin: 0; font-size: 0.95rem; }
+.kv dt { font-family: var(--f-label); font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--c); padding-top: 0.2rem; }
+.kv dd { margin: 0; }
+.tags { display: flex; flex-wrap: wrap; gap: 0.3rem; }
+.tags span { background: var(--t); color: var(--fg); font-size: 0.85rem; padding: 0.08rem 0.5rem; border-radius: 5px; }
+ol.do { margin: 0; padding-left: 1.3rem; display: grid; gap: 0.25rem; font-size: 0.97rem; }
+ol.do ul { margin: 0.25rem 0 0; padding-left: 1.1rem; display: grid; gap: 0.1rem; }
+.coach { margin: 0; font-size: 0.93rem; padding: 0.55rem 0.75rem; background: var(--bg); border-radius: 8px; }
+.coach b { color: var(--c); font-family: var(--f-label); font-weight: 500; font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; margin-right: 0.35rem; }
+.mini { font-size: 0.9rem; }
+.mini td, .mini th { padding: 0.4rem 0.6rem; }
+
+footer { font-size: 0.9rem; color: var(--muted); border-top: 1px solid var(--line); padding-top: 1rem; }
+footer p { margin: 0 0 0.3rem; max-width: 65ch; }
+</style>
+
+</head>
+<body>
+<div class="wrap">
+
+<nav class="toc" aria-label="Contents">
+  <h2>Contents</h2>
+  <ol>
+    <li class="f0"><a href="#how">How to Use</a></li>
+    <li class="f0"><a href="#finder">Quick Finder</a></li>
+    <li class="f0"><a href="#glance">At a Glance</a></li>
+    <li class="f1"><a href="#picture">Picture It</a>
+      <ol><li><a href="#visual">Make It Visual</a></li><li><a href="#concept">Concept Map</a></li><li><a href="#connection">Connection Map</a></li></ol></li>
+    <li class="f2"><a href="#think">Think It Through</a>
+      <ol><li><a href="#isnot">Is and Is Not</a></li><li><a href="#context">Context Clue Sentences</a></li></ol></li>
+    <li class="f3"><a href="#write">Write It</a>
+      <ol><li><a href="#freewrite">Free Write</a></li><li><a href="#silly">Shared Silly Stories</a></li></ol></li>
+    <li class="f4"><a href="#teach">Teach and Present</a>
+      <ol><li><a href="#teachword">Teach a Word</a></li><li><a href="#guess">Guess a Word</a></li></ol></li>
+    <li class="f5"><a href="#act">Act It Out</a>
+      <ol><li><a href="#charades">Charades</a></li><li><a href="#improv">Vocabulary Improv</a></li></ol></li>
+    <li class="f6"><a href="#reinforce">Reinforce Everywhere</a>
+      <ol><li><a href="#enlist">Enlist Other Teachers</a></li></ol></li>
+    <li class="f0"><a href="#source">Source</a></li>
+  </ol>
+</nav>
+
+<main>
+
+<header class="mast">
+  <span class="eyebrow">Teaching tool &middot; Any content area</span>
+  <h1>Vocabulary Strategies Toolkit</h1>
+  <p class="lede">12 strategies. Beyond flash cards. Connect, apply, create.</p>
+  <div class="legend" aria-label="Strategy families">
+    <a class="f1" href="#picture">Picture It</a>
+    <a class="f2" href="#think">Think It Through</a>
+    <a class="f3" href="#write">Write It</a>
+    <a class="f4" href="#teach">Teach and Present</a>
+    <a class="f5" href="#act">Act It Out</a>
+    <a class="f6" href="#reinforce">Reinforce Everywhere</a>
+  </div>
+</header>
+
+<section id="how" class="f0">
+  <div class="sec-head"><h2>How to Use</h2></div>
+  <ol class="steps3">
+    <li><b>Know the situation?</b>Quick Finder. Match it.</li>
+    <li><b>Checking logistics?</b>At a Glance. Compare.</li>
+    <li><b>Ready to run?</b>Open the card. Follow the steps.</li>
+  </ol>
+  <p class="tip"><b>Rotate.</b> 3 to 4 strategies per unit. Mix visual, written, social. Deeper ownership.</p>
+</section>
+
+<section id="finder" class="f0">
+  <div class="sec-head"><h2>Quick Finder</h2><p>Find your scenario. Start with the best bet.</p></div>
+  <div class="tbl">
+    <table>
+      <thead><tr><th>Scenario</th><th>Best bet</th><th>Also try</th></tr></thead>
+      <tbody>
+        <tr><td>Brand-new word list</td><td><a class="chip f1" href="#visual">Make It Visual</a></td><td class="also"><a class="chip f4" href="#teachword">Teach a Word</a><a class="chip f1" href="#concept">Concept Map</a></td></tr>
+        <tr><td>One abstract or confusing word</td><td><a class="chip f1" href="#concept">Concept Map</a></td><td class="also"><a class="chip f2" href="#isnot">Is and Is Not</a></td></tr>
+        <tr><td>Know definitions. Never use them.</td><td><a class="chip f3" href="#freewrite">Free Write</a></td><td class="also"><a class="chip f2" href="#context">Context Clue Sentences</a></td></tr>
+        <tr><td>Higher-order thinking</td><td><a class="chip f2" href="#isnot">Is and Is Not</a></td><td class="also"><a class="chip f1" href="#connection">Connection Map</a></td></tr>
+        <tr><td>Review before a quiz</td><td><a class="chip f4" href="#guess">Guess a Word</a></td><td class="also"><a class="chip f5" href="#charades">Charades</a><a class="chip f1" href="#connection">Connection Map</a></td></tr>
+        <tr><td>Low energy. Restless class.</td><td><a class="chip f5" href="#charades">Charades</a></td><td class="also"><a class="chip f5" href="#improv">Vocabulary Improv</a></td></tr>
+        <tr><td>Almost no prep time</td><td><a class="chip f3" href="#freewrite">Free Write</a></td><td class="also"><a class="chip f5" href="#charades">Charades</a><a class="chip f1" href="#visual">Make It Visual</a></td></tr>
+        <tr><td>Devices and Google Slides ready</td><td><a class="chip f4" href="#teachword">Teach a Word</a></td><td class="also"><a class="chip f4" href="#guess">Guess a Word</a></td></tr>
+        <tr><td>Unit-long student reference</td><td><a class="chip f4" href="#teachword">Teach a Word</a></td><td class="also"><a class="chip f1" href="#concept">Concept Map</a></td></tr>
+        <tr><td>Collaboration and laughter</td><td><a class="chip f3" href="#silly">Shared Silly Stories</a></td><td class="also"><a class="chip f5" href="#improv">Vocabulary Improv</a></td></tr>
+        <tr><td>Quiet, independent work</td><td><a class="chip f1" href="#visual">Make It Visual</a></td><td class="also"><a class="chip f3" href="#freewrite">Free Write</a><a class="chip f2" href="#context">Context Clue Sentences</a></td></tr>
+        <tr><td>Reading comprehension</td><td><a class="chip f2" href="#context">Context Clue Sentences</a></td><td class="also"><a class="chip f1" href="#concept">Concept Map</a></td></tr>
+        <tr><td>Words that stick schoolwide</td><td><a class="chip f6" href="#enlist">Enlist Other Teachers</a></td><td class="also"><a class="chip f3" href="#freewrite">Free Write</a></td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section id="glance" class="f0">
+  <div class="sec-head"><h2>At a Glance</h2><p>All 12. Side by side.</p></div>
+  <div class="tbl">
+    <table>
+      <thead><tr><th>Strategy</th><th>Grouping</th><th>Prep</th><th>Tech</th><th>Energy</th></tr></thead>
+      <tbody>
+        <tr class="f1"><td><span class="dot"></span><a href="#visual">Make It Visual</a></td><td>Solo</td><td class="lvl">Low</td><td>None</td><td>Calm</td></tr>
+        <tr class="f1"><td><span class="dot"></span><a href="#concept">Concept Map</a></td><td>Solo</td><td class="lvl">Low</td><td>None</td><td>Calm</td></tr>
+        <tr class="f1"><td><span class="dot"></span><a href="#connection">Connection Map</a></td><td>Solo or pairs</td><td class="lvl">Low</td><td>None</td><td>Calm</td></tr>
+        <tr class="f2"><td><span class="dot"></span><a href="#isnot">Is and Is Not</a></td><td>Solo</td><td class="lvl">Low</td><td>None</td><td>Calm</td></tr>
+        <tr class="f2"><td><span class="dot"></span><a href="#context">Context Clue Sentences</a></td><td>Solo</td><td class="lvl">Low</td><td>None</td><td>Calm</td></tr>
+        <tr class="f3"><td><span class="dot"></span><a href="#freewrite">Free Write</a></td><td>Solo</td><td class="lvl">Very low</td><td>None</td><td>Calm</td></tr>
+        <tr class="f3"><td><span class="dot"></span><a href="#silly">Shared Silly Stories</a></td><td>Circle of 4 to 8</td><td class="lvl">Medium</td><td>None</td><td>Social</td></tr>
+        <tr class="f4"><td><span class="dot"></span><a href="#teachword">Teach a Word</a></td><td>Solo, then class</td><td class="lvl">Medium</td><td>Google Slides</td><td>Moderate</td></tr>
+        <tr class="f4"><td><span class="dot"></span><a href="#guess">Guess a Word</a></td><td>Solo, then groups</td><td class="lvl">Medium</td><td>Google Slides</td><td>Social</td></tr>
+        <tr class="f5"><td><span class="dot"></span><a href="#charades">Charades</a></td><td>Whole class</td><td class="lvl">Very low</td><td>None</td><td>High</td></tr>
+        <tr class="f5"><td><span class="dot"></span><a href="#improv">Vocabulary Improv</a></td><td>Small groups</td><td class="lvl">Low</td><td>None</td><td>High</td></tr>
+        <tr class="f6"><td><span class="dot"></span><a href="#enlist">Enlist Other Teachers</a></td><td>Schoolwide</td><td class="lvl">Low</td><td>Email</td><td>Passive</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="note">Prep, tech, and energy ratings are planning estimates. Not from the source article.</p>
+</section>
+
+<!-- PICTURE IT -->
+<section id="picture" class="f1">
+  <div class="sec-head"><h2>Picture It</h2><p>Words become images and maps. First exposure. Mental hooks.</p></div>
+  <div class="cards">
+    <article id="visual">
+      <h3>Make It Visual</h3>
+      <p class="hook">Draw it. Own it.</p>
+      <dl class="kv">
+        <dt>Best for</dt><dd class="tags"><span>New lists</span><span>Quiet work</span><span>Low prep</span></dd>
+        <dt>Materials</dt><dd>8-box handout. One word per box.</dd>
+      </dl>
+      <ol class="do">
+        <li>Pass out the sheet.</li>
+        <li>One drawing per word.</li>
+        <li>Personal meaning. Links to something they know.</li>
+      </ol>
+      <p class="coach"><b>Coach it</b>Weird beats pretty. Inside jokes stick.</p>
+    </article>
+
+    <article id="concept">
+      <h3>Concept Map</h3>
+      <p class="hook">One hard word. Total deep dive.</p>
+      <dl class="kv">
+        <dt>Best for</dt><dd class="tags"><span>Abstract words</span><span>Repeat misses</span></dd>
+        <dt>Materials</dt><dd>Paper or digital template.</dd>
+      </dl>
+      <ol class="do">
+        <li>Word in the center.</li>
+        <li>Branch out:
+          <ul>
+            <li>Definition. Part of speech.</li>
+            <li>Synonyms. Antonyms.</li>
+            <li>Word origin.</li>
+            <li>Visual.</li>
+            <li>Used in a sentence.</li>
+            <li>What it is NOT.</li>
+          </ul>
+        </li>
+        <li>Add anything that helps a peer.</li>
+      </ol>
+      <p class="coach"><b>Coach it</b>1 to 3 tough words. Not the whole list.</p>
+    </article>
+
+    <article id="connection">
+      <h3>Connection Map</h3>
+      <p class="hook">Link every word. Label every link.</p>
+      <dl class="kv">
+        <dt>Best for</dt><dd class="tags"><span>Review</span><span>Higher-order</span><span>Big picture</span></dd>
+        <dt>Materials</dt><dd>Large white paper. Markers.</dd>
+      </dl>
+      <ol class="do">
+        <li>Write one word.</li>
+        <li>Add a connected word. Draw a line.</li>
+        <li>On the line: HOW they connect. Words or sketch.</li>
+        <li>Repeat. Link to any word on the page. Use them all.</li>
+      </ol>
+      <p class="coach"><b>Coach it</b>The line is the learning. Ban "they're related."</p>
+    </article>
+  </div>
+</section>
+
+<!-- THINK IT THROUGH -->
+<section id="think" class="f2">
+  <div class="sec-head"><h2>Think It Through</h2><p>Reason it out. No lookups. Critical thinking.</p></div>
+  <div class="cards">
+    <article id="isnot">
+      <h3>Is and Is Not</h3>
+      <p class="hook">Original ideas only. No dictionary answers.</p>
+      <dl class="kv">
+        <dt>Best for</dt><dd class="tags"><span>Higher-order</span><span>Abstract words</span><span>Exposing shallow recall</span></dd>
+        <dt>Materials</dt><dd>Fill-in frame per word.</dd>
+      </dl>
+      <ol class="do">
+        <li>Frame: "[Word] is ___. [Word] is not ___."</li>
+        <li>Banned: definitions, synonyms, antonyms.</li>
+        <li>Invent concepts, examples, scenarios.</li>
+      </ol>
+      <p class="coach"><b>Coach it</b>Googleable? Doesn't count. That rule forces thinking.</p>
+    </article>
+
+    <article id="context">
+      <h3>Context Clue Sentences</h3>
+      <p class="hook">Write so a stranger could crack it.</p>
+      <dl class="kv">
+        <dt>Best for</dt><dd class="tags"><span>Comprehension</span><span>Definition to usage</span><span>Solo work</span></dd>
+        <dt>Materials</dt><dd>Word list. Clue-type chart.</dd>
+      </dl>
+      <ol class="do">
+        <li>One sentence per word.</li>
+        <li>Each uses one clue type:</li>
+      </ol>
+      <div class="tbl mini">
+        <table>
+          <thead><tr><th>Clue</th><th>Move</th></tr></thead>
+          <tbody>
+            <tr><td><b>Definition</b></td><td>States the meaning.</td></tr>
+            <tr><td><b>Inference</b></td><td>Enough detail to deduce it.</td></tr>
+            <tr><td><b>Example</b></td><td>Shows an instance.</td></tr>
+            <tr><td><b>Synonym</b></td><td>Pairs with a known twin.</td></tr>
+            <tr><td><b>Antonym</b></td><td>Contrasts with its opposite.</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="coach"><b>Coach it</b>Swap. Blank the word. Partner guesses. Clues worked?</p>
+    </article>
+  </div>
+</section>
+
+<!-- WRITE IT -->
+<section id="write" class="f3">
+  <div class="sec-head"><h2>Write It</h2><p>Words at work. For "knows it, never uses it."</p></div>
+  <div class="cards">
+    <article id="freewrite">
+      <h3>Free Write</h3>
+      <p class="hook">Any topic. Max vocab.</p>
+      <dl class="kv">
+        <dt>Best for</dt><dd class="tags"><span>Real-writing transfer</span><span>Zero prep</span><span>Warm-up</span><span>Exit task</span></dd>
+        <dt>Materials</dt><dd>Paper or doc. Word list.</dd>
+      </dl>
+      <ol class="do">
+        <li>Student picks the topic.</li>
+        <li>Confident words first.</li>
+        <li>Then notes. Work in the shaky ones.</li>
+      </ol>
+      <p class="coach"><b>Coach it</b>Highlight each vocab word. Fast scan for usage.</p>
+    </article>
+
+    <article id="silly">
+      <h3>Shared Silly Stories</h3>
+      <p class="hook">Pass the paper. One word per sentence.</p>
+      <dl class="kv">
+        <dt>Best for</dt><dd class="tags"><span>Collaboration</span><span>Fun review</span><span>Words in context</span></dd>
+        <dt>Materials</dt><dd>Sheet per student. Word list stapled on. Circle seating.</dd>
+      </dl>
+      <ol class="do">
+        <li>Write an opening sentence. Use one word.</li>
+        <li>Cross it off.</li>
+        <li>Pass right.</li>
+        <li>Read. Add a sentence. New word. Cross it off.</li>
+        <li>Repeat until every word is used.</li>
+      </ol>
+      <p class="coach"><b>Coach it</b>Read a few aloud. Silly hooks. Misuse sparks talk.</p>
+    </article>
+  </div>
+</section>
+
+<!-- TEACH AND PRESENT -->
+<section id="teach" class="f4">
+  <div class="sec-head"><h2>Teach and Present</h2><p>Students as experts. Slides for peers. Devices needed.</p></div>
+  <div class="cards">
+    <article id="teachword">
+      <h3>Teach a Word</h3>
+      <p class="hook">One student. One word. One slide. Teach it.</p>
+      <dl class="kv">
+        <dt>Best for</dt><dd class="tags"><span>New lists</span><span>Shared reference</span><span>Speaking practice</span></dd>
+        <dt>Materials</dt><dd>Google Slide each. Shared deck to collect.</dd>
+      </dl>
+      <ol class="do">
+        <li>Assign one word each.</li>
+        <li>Slide includes:
+          <ul>
+            <li>Word. Definition.</li>
+            <li>Part of speech. Origin.</li>
+            <li>Synonyms. Antonyms.</li>
+            <li>Visual.</li>
+            <li>Sentence.</li>
+            <li>Anything helpful.</li>
+          </ul>
+        </li>
+        <li>Short presentation. Teach the class.</li>
+        <li>All slides into one shared doc.</li>
+      </ol>
+      <p class="coach"><b>Coach it</b>Instant study guide. Post it in your LMS (Learning Management System, like Google Classroom).</p>
+    </article>
+
+    <article id="guess">
+      <h3>Guess a Word</h3>
+      <p class="hook">Clue slides. Peers guess.</p>
+      <dl class="kv">
+        <dt>Best for</dt><dd class="tags"><span>Quiz review</span><span>Social energy</span><span>Creativity</span></dd>
+        <dt>Materials</dt><dd>Google Slide each. Combined deck.</dd>
+      </dl>
+      <ol class="do">
+        <li>Assign one word each.</li>
+        <li>Build a slide. Related words, phrases, images.</li>
+        <li>No definitions. Connections only.</li>
+        <li>Combine into one deck.</li>
+        <li>Guess from peer clues.</li>
+      </ol>
+      <p class="coach"><b>Coach it</b>Small groups. More turns. More guessing.</p>
+    </article>
+  </div>
+</section>
+
+<!-- ACT IT OUT -->
+<section id="act" class="f5">
+  <div class="sec-head"><h2>Act It Out</h2><p>Move. Speak. Perform. Low-energy days. Kinesthetic learners.</p></div>
+  <div class="cards">
+    <article id="charades">
+      <h3>Charades</h3>
+      <p class="hook">Silent acting. Class guesses.</p>
+      <dl class="kv">
+        <dt>Best for</dt><dd class="tags"><span>Restless class</span><span>Quick review</span><span>Near-zero prep</span></dd>
+        <dt>Materials</dt><dd>Words on slips or cards.</dd>
+      </dl>
+      <ol class="do">
+        <li>Draw a word.</li>
+        <li>Act it out. No talking.</li>
+        <li>Class guesses. Rotate actors.</li>
+      </ol>
+      <p class="coach"><b>Coach it</b>Abstract words are hard to act. Good. Forces real meaning.</p>
+    </article>
+
+    <article id="improv">
+      <h3>Vocabulary Improv</h3>
+      <p class="hook">Random word. Into the skit.</p>
+      <dl class="kv">
+        <dt>Best for</dt><dd class="tags"><span>Speaking</span><span>Natural usage</span><span>High energy</span></dd>
+        <dt>Materials</dt><dd>Container of word slips per group.</dd>
+      </dl>
+      <ol class="do">
+        <li>Groups. One container each.</li>
+        <li>Take turns drawing a word.</li>
+        <li>Work it into the improv scene.</li>
+      </ol>
+      <p class="coach"><b>Coach it</b>Give a starting scene. Job interview. Lost on vacation. Focus stays on words.</p>
+    </article>
+  </div>
+</section>
+
+<!-- REINFORCE -->
+<section id="reinforce" class="f6">
+  <div class="sec-head"><h2>Reinforce Everywhere</h2><p>Beyond your room. Long-term stickiness.</p></div>
+  <div class="cards">
+    <article id="enlist">
+      <h3>Enlist Other Teachers</h3>
+      <p class="hook">Colleagues drop the words. Students race to spot them.</p>
+      <dl class="kv">
+        <dt>Best for</dt><dd class="tags"><span>Retention</span><span>Cross-curricular</span><span>Better listening</span></dd>
+        <dt>Materials</dt><dd>Short email to same-grade colleagues.</dd>
+      </dl>
+      <ol class="do">
+        <li>Share your list.</li>
+        <li>Willing colleagues use a few words that week.</li>
+        <li>Students listen in other classes.</li>
+        <li>First to hear it wins.</li>
+      </ol>
+      <p class="coach"><b>Coach it</b>Unexpected place. Memorable word. Keep it small: 2 to 3 words per colleague per week.</p>
+    </article>
+  </div>
+</section>
+
+<footer id="source">
+  <p><b>Source.</b> Adapted from <a href="https://www.edutopia.org/article/vocabulary-teaching-strategies-middle-school/">Tips for Improving Vocabulary Instruction in Middle School</a>, Kasey Short, Edutopia, Nov. 30, 2023.</p>
+  <p>Families, Quick Finder, ratings, and Coach It tips added for this guide.</p>
+</footer>
+
+</main>
+</div>
+</body>
+</html>
